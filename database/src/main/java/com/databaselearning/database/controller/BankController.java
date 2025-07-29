@@ -2,14 +2,14 @@ package com.databaselearning.database.controller;
 
 
 import com.databaselearning.database.dto.BankDto;
-import com.databaselearning.database.dto.StudentDto;
 import com.databaselearning.database.model.Bank;
-import com.databaselearning.database.model.Student;
 import com.databaselearning.database.service.BankService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bank")
@@ -26,9 +26,14 @@ public class BankController {
     @GetMapping("getById")
     public BankDto getById(@RequestParam String bankId){
         logger.info("calling bank service with bankId {} for bank details " , bankId);
-        Bank bank = bankService.createBankById(bankId);
-         return new BankDto(bank);
+        BankDto bankDtos = bankService.createBankById(bankId);
+         return bankDtos;
 
+    }
+    @GetMapping("getAllElement")
+    public List<BankDto> getAllBank(){
+        logger.info("calling bank service with bankId for bank details");
+        return bankService.getAllBank();
     }
 
 }

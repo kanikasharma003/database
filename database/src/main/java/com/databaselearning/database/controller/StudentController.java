@@ -28,8 +28,8 @@ public class StudentController {
     @GetMapping("/getById")
     public StudentDto getById(@RequestParam String studentId){
         logger.info("calling student service with studentId {} for student details", studentId );
-       Student student = studentService.getStudentDetailById(studentId);
-        return new StudentDto(student);
+       StudentDto studentDto = studentService.getStudentDetailById(studentId);
+        return studentDto;
     }
     @GetMapping("/getAllStudent")
     public List<StudentDto> getAllStudent(){

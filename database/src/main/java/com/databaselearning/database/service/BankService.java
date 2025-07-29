@@ -1,5 +1,7 @@
 package com.databaselearning.database.service;
 
+import com.databaselearning.database.dto.BankDto;
+import com.databaselearning.database.mapper.BankMapper;
 import com.databaselearning.database.model.Bank;
 import com.databaselearning.database.repository.BankRepository;
 import org.slf4j.Logger;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 
 @Service
 public class BankService {
@@ -15,6 +19,8 @@ public class BankService {
 
     @Autowired
     private BankRepository bankRepository;
+    @Autowired
+    private BankMapper bankMapper;
 
     public Bank createBank(Bank bank){
 
@@ -24,11 +30,24 @@ public class BankService {
         return bank;
     }
 
-    public Bank createBankById(String bankId) {
+    public BankDto createBankById(String bankId) {
         logger.info("fetching bank ById {}", bankId);
          Bank bank= bankRepository.getReferenceById(Long.valueOf(bankId));
         logger.info("fetched bank ById {} student details {}", bankId,bank);
-        return bank;
+        BankDto bankDtos= bankMapper.toDto(bank);
+        return bankDtos;
 
     }
+
+    public List<BankDto> getAllBank() {
+        logger.info("fetched all the bank details ");
+       List<Bank> bank= bankRepository.findAll();
+        List<BankDto> bankDtos= bankMapper.toDtoList(bank);
+        return bankDtos;
+
+    }
+
 }
+
+
+

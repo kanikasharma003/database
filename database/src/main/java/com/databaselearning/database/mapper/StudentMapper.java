@@ -4,6 +4,7 @@ import com.databaselearning.database.dto.StudentDto;
 import com.databaselearning.database.model.Student;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 @Mapper(componentModel = "spring")
